@@ -69,7 +69,7 @@ class UserController extends Controller
 
         event(new Registered($user));
 
-        return redirect(RouteServiceProvider::HOME);
+        return to_route('user');
     }
 
     /**
@@ -101,21 +101,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        // $request->validate([
-        //     'fullname'  => ['required'],
-        //     'address'  => ['required'],
-        //     'password'  => ['required', 'confirmed'],
-        //     'phonenumber'  => ['required']
-        // ]);
-
-        // $user->update([
-        //     'fullname' => $request->fullname,
-        //     'address' => $request->address,
-        //     'password' => Hash::make($request->password),
-        //     'phoneNumber' => $request->phoneNumber,
-        // ]);
+        DB::table('users')
+        ->where('id', $request->id)
+        ->update([
+            'fullname' => $request->fullname,
+            'password' => Hash::make($request->password),
+            'phoneNumber' => $request->phoneNumber,
+            'email' => $request->email
+        ]);
 
         return to_route('user');
     }
@@ -154,9 +149,9 @@ class UserController extends Controller
         return Datatables::of($users)
         ->addColumn('action', function($user) {
             $html = '
-            <a data-rowid="" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top"
-                data-container="body" title="Edit Pengguna" href="'.route('userView', $user->id).'">
-            <i class="fa-regular fa-pen-to-square"></i></a>
+            <a href="'.route('userView', $user->id).'">
+            <i class="fas fa-edit"></i>
+            </a>
             ';
             return $html;
         })

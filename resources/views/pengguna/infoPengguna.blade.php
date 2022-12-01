@@ -10,6 +10,13 @@
                 @csrf
                 @method('PUT')
 
+                <!-- Id -->
+                <div>
+                    <x-text-input id="id" class="block mt-1 w-full" type="text" name="id" value="{{$user->id}}" hidden/>
+
+                    <x-input-error :messages="$errors->get('id')" class="mt-2" />
+                </div>
+
                 <!-- Username -->
                 <div>
                     <x-input-label for="username" :value="__('Username')" />

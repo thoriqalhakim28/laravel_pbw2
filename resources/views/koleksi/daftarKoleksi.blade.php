@@ -19,7 +19,7 @@
                                 <th>Judul</th>
                                 <th>Jenis</th>
                                 <th>Jumlah</th>
-                                <th>Opsi</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                     </table>

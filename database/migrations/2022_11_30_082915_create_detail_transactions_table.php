@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreign('collectionId')->references('id')->on('collections');
             $table->date('tanggalKembali')->nullable();
             $table->tinyInteger('status');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     });
     Route::prefix('dashboard')->group(function() {
         Route::get('detailTransactionKembalikan/{detailTransactionId}', [DetailTransactionController::class, 'detailTransactionKembalikan'])->name('detailTransactionKembalikan');
-        Route::get('detailTransactionUpdate', [DetailTransactionController::class, 'update'])->name('detailTransactionUpdate');
+        Route::put('detailTransactionUpdate', [DetailTransactionController::class, 'update'])->name('detailTransactionUpdate');
         Route::get('getAllDetailTransactions/{transactionId}', [DetailTransactionController::class, 'getAllDetailTransactions'])->name('getAllDetailTransactions');
     });
 

@@ -132,9 +132,9 @@ class CollectionController extends Controller
         return Datatables::of($collections)
         ->addColumn('action', function($collection) {
             $html = '
-            <a data-rowid="" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top"
-                data-container="body" title="Edit" href="'. route('koleksiView', $collection -> id) .'">
-            <i class="fa-regular fa-pen-to-square"></i></a>
+            <a href="'. route('koleksiView', $collection -> id) .'">
+            <i class="fas fa-edit"></i>
+            </a>
             ';
             return $html;
         })
