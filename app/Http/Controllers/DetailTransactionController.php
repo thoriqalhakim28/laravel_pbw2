@@ -92,7 +92,7 @@ class DetailTransactionController extends Controller
         }
 
         $transaction = Transaction::where('id', '=', $request->idTransaksi)->first();
-        return redirect('transaksiView/'.$request->idTransaksi)->with('transaction', $transaction);
+        return to_route('transaksiView', ['transaction'=> $request->session()->get('transactionId')]);
     }
 
     /**
@@ -106,9 +106,13 @@ class DetailTransactionController extends Controller
         //
     }
 
-    public function getAllDetailTransactions($transactionId)
+    public function getAllDetailTransactions(Request $request, $transactionId)
     {
-        $detail_transactions = DB::table('detail_transactions as dt')
+        $request->session()->regenerate();
+        $request->session()->put('transactionId', $transactionId);
+
+        if ($request->ajax()) {
+$detail_transactions = DB::table('detail_transactions as dt')
         ->select(
             'dt.id',
             'dt.tanggalKembali as tanggalKembali',
@@ -136,6 +140,7 @@ class DetailTransactionController extends Controller
             return $html;
         })
         ->make(true);
+        }
     }
 
     public function detailTransactionKembalikan($detailTransactionId)
