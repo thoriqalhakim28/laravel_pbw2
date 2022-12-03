@@ -43,7 +43,7 @@ class CollectionController extends Controller
             'jumlahKoleksi' => ['required', 'numeric']
         ]);
 
-        $user = Collection::create([
+        $collection = Collection::create([
             'namaKoleksi' => $request->namaKoleksi,
             'jenisKoleksi' => $request->jenisKoleksi,
             'jumlahKoleksi' => $request->jumlahKoleksi,
@@ -108,8 +108,9 @@ class CollectionController extends Controller
      */
     public function destroy(Collection $collection)
     {
-        $collection = Collection::find($collection);
+        $collection = Collection::findOrfail($collection);
         $collection->delete();
+        return view('koleksi.daftarKoleksi');
     }
 
     public function getAllCollection() {
@@ -132,7 +133,7 @@ class CollectionController extends Controller
         return Datatables::of($collections)
         ->addColumn('action', function($collection) {
             $html = '
-            <a href="'. route('koleksiView', $collection -> id) .'">
+            <a href="'. route('koleksiView', $collection -> id) .'" data-toggle="tooltip" data-placement="top" title="Edit">
             <i class="fas fa-edit"></i>
             </a>
             ';
