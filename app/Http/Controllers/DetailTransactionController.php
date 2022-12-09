@@ -112,7 +112,7 @@ class DetailTransactionController extends Controller
         $request->session()->put('transactionId', $transactionId);
 
         if ($request->ajax()) {
-$detail_transactions = DB::table('detail_transactions as dt')
+        $detail_transactions = DB::table('detail_transactions as dt')
         ->select(
             'dt.id',
             'dt.tanggalKembali as tanggalKembali',

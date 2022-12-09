@@ -43,8 +43,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
-         'username' => ['required', 'string', 'max:100'],
+        $request->validate([
+            'username' => ['required', 'string', 'max:100'],
             'fullname' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string','email', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
